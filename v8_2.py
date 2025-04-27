@@ -1,5 +1,74 @@
 # CutCaption - Video Kesme Otomasyonu
 
+# Bu kod, tanımlı klasördeki tüm videoları tarar,
+# Altyazılar içinde belirli bir kelimeyi bulur ve kelimenin geçtiği kısımları keserek kaydeder.
+
+#       Version 2 ---------------------------------------------
+# srt dosyasından seçilen kelimelerin, videodaki zamanlarını bulma
+# Bulunan zamanları videoda kesme
+
+#       Version 3 ---------------------------------------------
+# Kesilen videoları belirlenen bir OUTPUT klasörüne kaydetme eklendi
+
+#       Version 4 ---------------------------------------------
+# Dosya isimlerine timecode eklendi
+
+#       Version 5 ---------------------------------------------
+# dosya ismindeki <>:"/\\|?* ve <boşluk> karakterleri "_" ile değiştirme eklendi
+
+#       Version 6 ---------------------------------------------
+# dosya ismindeki türkçe karakterleri ingilizce karşılığına çeviren bie eklenti yapıldı
+
+#       Version 6.1 ---------------------------------------------
+# Daha iyi dosya adlandırma: Dosya ismindeki tüm harfler küçük harflere dönüştürüldü.
+# Altyazı dosyası açılırken oluşabilecek hatalar yakalanıyor
+# Gereksiz tekrarlar azaltıldı: sanitize_filename ve replace_turkish_chars fonksiyonları düzenlendi.
+# FFmpeg komutunu iyileştirildi: Gereksiz parametreler çıkarıldı, daha stabil çalışması sağlandı
+
+#       Version 6.2 ---------------------------------------------
+# Geliştirilmiş FFmpeg Komutları ve Dosya İsmi Düzenleme
+# sanitize_filename fonksiyonunda .mp4 uzantısının kesin eklenmesi
+# FFmpeg komutunda hata yakalama mekanizması eklenmesi
+# Dosya işleme sırasında detaylı log eklenmesi
+
+#       Version 7 ---------------------------------------------
+# Arayüz eklendi! Artık videoların ve altyazıların olduğu klasörü, çıkış klasörünü ve aranacak kelimeyi bir pencere üzerinden seçerek işlemi başlatabilirsiniz. 
+
+#       Version 7.1 ---------------------------------------------
+# Arayüzde o anda hangi dosyanın işlendiğini ve işlemler bittiğinde kaç tane video kestiğini belirten bir eklenti yapıldı
+
+#       Version 7.2 ---------------------------------------------
+# Arayüzdeki bilgilerin refresh hatalarıdüzeltildi
+
+#       Version 7.3 ---------------------------------------------
+# kesilen videoların başına ve sonuna 1 saniye eklendi
+
+#       Version 7.4 ---------------------------------------------
+# Arayüze bitrate ayarını da eklendi
+
+#       Version 7.5 ---------------------------------------------
+# Arayüze bitrate ayarını kbps olarak girme eklendi
+
+#       Version 7.6 ---------------------------------------------
+# İyileştirmeler yapıldı
+
+#       Version 7.7 ---------------------------------------------
+# process_videos_in_folder fonksiyonuna toplam video sayısını ve kesilecek video sayısını belirten kod eklendi.
+# Kullanıcıya işlem sırasındaki gelişmeleri göstermek için arayüzdeki etiketler güncellendi.
+# İşlem tamamlandığında kullanıcıya bilgi mesajı gösterilmesi sağlandı
+# Start düğmesi başlangıçta yeşil renkte olacak, işlemler başladığında kırmızı renge dönecek ve işlemler tamamlandığında tekrar yeşil renge dönme özelliği eklendi
+
+#       Version 8 ---------------------------------------------
+# Arayüz düzenlemeleri yapıldı
+
+#       Version 8.1 ---------------------------------------------
+# Dosya ismine bitrate eklendi
+# Kesilme işlemi yapılan video dosyasına eklenen timecode'u kısaltmak için start ve end zamanlarının sadece saat, dakika ve saniye kısmını kullanıldı
+# dosya ismine eklenen bitrate değeri 1000 ile bölünerek yazıldı ve 'mbps' olarak belirtildi
+
+#       Version 8.2 ---------------------------------------------
+# Terminal çıktıları anlık olarak arayüzde gösterilecek ve işlemler tamamlandığında çıkan mesaj ana arayüzde görünecek.
+# İşlem bitti uyarı penceresi kalktı
 
 import os
 import pysrt
